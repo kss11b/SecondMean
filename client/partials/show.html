@@ -1,0 +1,12 @@
+<div ng-controller="showController">
+  <a href="#!/dash">Home</a>
+<h3>{{thisUser.fname}} {{thisUser.lname}}</h3>
+<h4>Done</h4>
+<div ng-repeat="item in items" ng-show="item.status">
+<p ng-if="item.users.author.indexOf(thisUser) != -1"><input type="checkbox" value="true"> {{item.author.fname}} {{item.author.lname}} | {{item.title}} | {{item.description}} | {{item.createdAt | date:'yyyy-MM-dd'}}</p>
+</div>
+<h4>Pending</h4>
+<div ng-repeat="item in items" ng-show="item.status == false">
+  <p ng-if="item.users.author.indexOf(thisUser) != -1"><input type="checkbox" value="false">{{item.author.fname}} {{item.author.lname}} | {{item.title}} | {{item.description}} | {{item.createdAt | date:'yyyy-MM-dd'}}</p>
+</div>
+</div>

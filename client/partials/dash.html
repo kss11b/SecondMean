@@ -1,0 +1,25 @@
+<div ng-controller="dashController">
+  <a href="#!/dash">Home</a>
+  <button ng-click="logout()">Logout</button>
+  <h1>Bucket List</h1>
+  <h3>Welcome, {{current_user.fname}}!</h3>
+  <form ng-submit="item(newItem)">
+    <input type="text" placeholder="Title" ng-model="newItem.title">
+    <input type="text" placeholder="Description" ng-model="newItem.description">
+    <select ng-model="newItem.users" placeholder="Select User">
+    <option ng-repeat="user in allUsers" ng-value="user._id">{{user.fname}} {{user.lname}}</option>
+    </select>
+    <input type="submit" value="Add to List">
+  </form>
+
+  <h3>Before I die I want to...</h3>
+  <h4>Done</h4>
+  <div ng-repeat="item in items" ng-show="item.status == true">
+
+    <p ng-if="item.users.author.indexOf(current_user) != -1"><input type="checkbox" value="true"> <a href="#!/show/{{item.author._id}}" >{{item.author.fname}} {{item.author.lname}}</a> | {{item.title}} | {{item.description}} | {{item.createdAt | date:'yyyy-MM-dd'}}</p>
+  </div>
+  <h4>Pending</h4>
+  <div ng-repeat="item in items" ng-show="item.status == false">
+    <p ng-show="item.users.author.indexOf(current_user) != -1"><input type="checkbox" value="false" ng-click="done(item._id)"><a href="#!/show/{{item.author._id}}">{{item.author.fname}} {{item.author.lname}}</a> | {{item.title}} | {{item.description}} | {{item.createdAt | date:'yyyy-MM-dd'}}</p>
+  </div>
+</div>
